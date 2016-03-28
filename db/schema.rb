@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20160327105510) do
     t.date     "tournament_start_date"
     t.date     "tournament_end_date"
     t.string   "tournament_surface"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "tournament_surface_inout"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "activities", ["year", "player_name", "opponent_name", "round", "tournament_name"], name: "activities_uniq_index", unique: true

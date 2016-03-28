@@ -15,6 +15,7 @@ class CreateActivities < ActiveRecord::Migration
       t.date :tournament_start_date
       t.date :tournament_end_date
       t.string :tournament_surface
+      t.string :tournament_surface_inout
       t.timestamps null: false
     end
     add_index :activities, [:year, :player_name, :opponent_name, :round, :tournament_name], unique: true, name: 'activities_uniq_index'
