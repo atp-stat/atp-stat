@@ -110,6 +110,7 @@ GEM
       shellany (~> 0.0)
     parser (2.3.0.7)
       ast (~> 2.2)
+    pg (0.18.4)
     power_assert (0.2.7)
     powerpack (0.1.1)
     pry (0.10.3)
@@ -219,6 +220,7 @@ DEPENDENCIES
   guard-rubocop
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   pry-rails
   rails (= 4.2.6)
   rubocop
