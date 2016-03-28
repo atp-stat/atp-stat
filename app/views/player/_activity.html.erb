@@ -12,7 +12,14 @@
   </thead>
   <tbody>
   <% activities.each do |activity| %>
-    <tr class="<%= 'success' if activity.win_loss == 'W' %>">
+    <%
+    if activity.win_loss == 'W'
+      tr_class = 'success'
+    elsif activity.win_loss == 'L'
+      tr_class = 'danger'
+    end
+    %>
+    <tr class="<%= tr_class %>">
       <td><%= activity.tournament_name %>(<%= activity.year %>)</td>
       <td><%= activity.round %></td>
       <td><%= activity.player_name %> (<%= activity.player_rank %>)</td>
