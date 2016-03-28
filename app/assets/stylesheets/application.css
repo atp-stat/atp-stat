@@ -11,6 +11,10 @@
  * file per style scope.
  *
  *= require_tree .
- *= require kathamo.min
+ *= require bootstrap.min
  *= require_self
  */
+
+body {
+    padding-top: 50px;
+}
