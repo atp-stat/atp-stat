@@ -1,1 +1,27 @@
-<%= @player_name %>
+<h1><%= @player %>'s Activity</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <td>Tournament</td>
+      <td>Round</td>
+      <td>Player(Rank)</td>
+      <td>Opponet Player(Rank)</td>
+      <td>Score</td>
+      <td>Surface</td>
+      <td>W-L</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @activities.each do |activity| %>
+    <tr class="<%= 'success' if activity.win_loss == 'W' %>">
+      <td><%= activity.tournament_name %>(<%= activity.year %>)</td>
+      <td><%= activity.round %></td>
+      <td><%= activity.player_name %> (<%= activity.player_rank %>)</td>
+      <td><%= activity.opponent_name %> (<%= activity.opponent_rank %>)</td>
+      <td><%= activity.score %></td>
+      <td><%= activity.tournament_surface %>(<%= activity.tournament_surface_inout %>)</td>
+      <td><%= activity.win_loss%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
