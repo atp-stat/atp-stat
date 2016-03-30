@@ -20,6 +20,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rubocop'
   gem 'pry-rails'
+  gem 'rb-readline'
   gem 'guard'
   gem 'guard-rubocop'
   gem 'guard-minitest'
