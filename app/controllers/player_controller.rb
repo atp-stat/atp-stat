@@ -1,6 +1,6 @@
 class PlayerController < ApplicationController
   def show
-    @year = Date.today.year
+    @year = Date.today.year.to_i
     @year = params[:year].to_i if params[:year]
     @player = Player.convert_name_from_url_name(params[:player_url_name])
     @activities = Activity.where("player_name = ?", @player)
