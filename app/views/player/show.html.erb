@@ -1,4 +1,12 @@
 <h1 class="page-header"><%= @player %>'s Activity <%= @year %></h1>
+<div class="select-year">
+  <select id="activity-year" class="form-control">
+    <% year_range = Range.new(2000, Date.today.year) %>
+    <% year_range.reverse_each do |y| %>
+    <option value="<%= y %>" <%= "selected" if y == @year %>><%= y %></option>
+    <% end %>
+  </select>
+</div>
 <div class="activity-section">
   <h2>vs Top10</h2>
   <%= render 'activity', activities: @activities_vstop10 %>
