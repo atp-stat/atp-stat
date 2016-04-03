@@ -39,11 +39,13 @@ ActiveRecord::Schema.define(version: 20160403103602) do
   add_index "activities", ["year", "player_name", "opponent_name", "round", "tournament_name"], name: "activities_uniq_index", unique: true, using: :btree
 
   create_table "activity_jobs", force: :cascade do |t|
-    t.string   "player_name"
-    t.string   "player_id"
-    t.string   "year"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "player_name",             null: false
+    t.string   "player_id",               null: false
+    t.string   "year",                    null: false
+    t.integer  "working",     default: 0
+    t.integer  "finished",    default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "players", force: :cascade do |t|

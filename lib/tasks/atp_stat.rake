@@ -10,6 +10,11 @@ namespace :atp_stat do
             url_name: player[:player_url_name],
             url_id: player[:player_id]
           )
+          ActivityJob.create(
+            player_name: player[:player_name],
+            player_id: player[:player_id],
+            year: "all"
+          )
           puts "[Create] Record create(#{player[:player_name]})"
         rescue ActiveRecord::RecordNotUnique => e
           puts "[Skip] Record Duplicate(#{player[:player_name]})"
