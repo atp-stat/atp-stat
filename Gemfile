@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'atp_scraper'
 
-group :production do
+group :production, :staging do
   gem 'pg'
   gem 'rails_12factor'
 end
