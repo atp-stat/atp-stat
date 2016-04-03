@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160327105510) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "year"
     t.string   "player_name"
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160327105510) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "activities", ["year", "player_name", "opponent_name", "round", "tournament_name"], name: "activities_uniq_index", unique: true
+  add_index "activities", ["year", "player_name", "opponent_name", "round", "tournament_name"], name: "activities_uniq_index", unique: true, using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +46,6 @@ ActiveRecord::Schema.define(version: 20160327105510) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "players", ["url_id"], name: "players_uniq_index", unique: true
+  add_index "players", ["url_id"], name: "players_uniq_index", unique: true, using: :btree
 
 end
