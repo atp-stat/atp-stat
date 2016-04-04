@@ -42,7 +42,7 @@ namespace :atp_stat do
     end
 
     desc "Weekly batch. Register jobs to get latest acitivity for all players."
-    task :register_weekly_job => :environment do |task, args|
+    task :register_job_latest => :environment do |task, args|
       players = Player.all
       players.each do |player|
         ActivityJob.create(
