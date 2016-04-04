@@ -40,5 +40,18 @@ namespace :atp_stat do
         end
       end
     end
+
+    desc "Weekly batch. Register jobs to get latest acitivity for all players."
+    task :register_weekly_job => :environment do |task, args|
+      players = Player.all
+      players.each do |player|
+        ActivityJob.create(
+          player_name: player.name,
+          player_id: player.id,
+          year: Date.today.year.to_s
+        )
+        puts "[Job Created] #{player.name}"
+      end
+    end
   end
 end
