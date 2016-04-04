@@ -47,10 +47,21 @@ namespace :atp_stat do
       players.each do |player|
         ActivityJob.create(
           player_name: player.name,
-          player_id: player.id,
+          player_id: player.url_id,
           year: Date.today.year.to_s
         )
         puts "[Job Created] #{player.name}"
+      end
+    end
+
+    desc "Exec job to get activity."
+    task :exec_job => :environment do |task, args|
+      job = ActivityJob.where(working: 0).where(finished: 0).first
+      job.update(working: 1, finished: 1)
+      begin
+        Rake::Task["atp_stat:activity:get"].invoke(job.player_id, job.year)
+      rescue => e
+        job.update(working: 0, finished: 0)
       end
     end
   end
