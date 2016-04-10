@@ -11,14 +11,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem 'atp_scraper'
+gem 'pg'
 
-group :production, :staging do
-  gem 'pg'
+group :staging do
   gem 'rails_12factor'
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug'
   gem 'rubocop'
   gem 'pry-rails'
