@@ -36,4 +36,9 @@ staging:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: atp-stat
+  pool: 5
+  username: atp-stat
+  password:
