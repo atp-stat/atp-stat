@@ -1,0 +1,22 @@
+<h1>Job</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>Player</td>
+      <td>Year</td>
+      <td>Finish</td>
+      <td>Created</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @jobs.each do |job| %>
+    <tr>
+      <td><%= job.player_name %></td>
+      <td><%= job.year %></td>
+      <td><%= "Finish" if job.finished == 1 %></td>
+      <td><%= job.created_at %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
