@@ -3,7 +3,7 @@
   <select id="activity-year" class="form-control">
     <% year_range = Range.new(2000, Date.today.year) %>
     <% year_range.reverse_each do |y| %>
-    <option value="<%= y %>" <%= "selected" if y == @year %>><%= y %></option>
+    <option value="<%= y %>" <%= "selected" if y == @year.to_i %>><%= y %></option>
     <% end %>
   </select>
 </div>
