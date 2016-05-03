@@ -8,18 +8,18 @@
   </select>
 </div>
 <div class="activity-section">
-  <h2>vs Top10</h2>
+  <h2>vs Top10 <small>Win:<%= @activities_vstop10_win_count %> / Lose:<%= @activities_vstop10_lose_count %></small></h2>
   <%= render 'activity', activities: @activities_vstop10 %>
 </div>
 <div class="activity-section">
-  <h2>vs Higher Ranking</h2>
+  <h2>vs Higher Ranking <small>Win:<%= @activities_higher_win_count %> / Lose:<%= @activities_higher_lose_count %></small></h2>
   <%= render 'activity', activities: @activities_higher %>
 </div>
 <div class="activity-section">
-  <h2>Losing for Lower Ranking</h2>
+  <h2>vs Lower Ranking <small>Win:<%= @activities_lower_win_count %> / Lose:<%= @activities_lower_lose_count %></small></h2>
   <%= render 'activity', activities: @activities_lower %>
 </div>
 <div class="activity-section">
-  <h2>All</h2>
+  <h2>All <small>Win:<%= @activities_all_win_count %> / Lose:<%= @activities_all_lose_count %></small></h2>
   <%= render 'activity', activities: @activities %>
 </div>
