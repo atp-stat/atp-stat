@@ -1,6 +1,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <td>Category</td>
       <td>Tournament</td>
       <td>Round</td>
       <td>Player(Rank)</td>
@@ -20,10 +21,11 @@
     end
     %>
     <tr class="<%= tr_class %>">
+      <td><%= activity.tournament_category %></td>
       <td><%= activity.tournament_name %></td>
       <td><%= activity.round %></td>
-      <td><%= activity.player_name %> (<%= activity.player_rank %>)</td>
-      <td><%= activity.opponent_name %> (<%= activity.opponent_rank %>)</td>
+      <td><%= activity.player_name %> (<%= output_ranking(activity.player_rank) %>)</td>
+      <td><%= activity.opponent_name %> (<%= output_ranking(activity.opponent_rank) %>)</td>
       <td><%= activity.score %></td>
       <td><%= activity.tournament_surface %>(<%= activity.tournament_surface_inout %>)</td>
       <td><%= activity.win_loss%></td>
