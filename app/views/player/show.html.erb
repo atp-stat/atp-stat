@@ -9,17 +9,33 @@
 </div>
 <div class="activity-section">
   <h2>vs Top10 <small>Win:<%= @activities_vstop10_win_count %> / Lose:<%= @activities_vstop10_lose_count %></small></h2>
-  <%= render 'activity', activities: @activities_vstop10 %>
+  <% if @activities_vstop10.first %>
+    <%= render 'activity', activities: @activities_vstop10 %>
+  <% else %>
+    <p>No activities</p>
+  <% end %>
 </div>
 <div class="activity-section">
   <h2>vs Higher Ranking <small>Win:<%= @activities_higher_win_count %> / Lose:<%= @activities_higher_lose_count %></small></h2>
-  <%= render 'activity', activities: @activities_higher %>
+  <% if @activities_higher.first %>
+    <%= render 'activity', activities: @activities_higher %>
+  <% else %>
+    <p>No activities</p>
+  <% end %>
 </div>
 <div class="activity-section">
   <h2>vs Lower Ranking <small>Win:<%= @activities_lower_win_count %> / Lose:<%= @activities_lower_lose_count %></small></h2>
-  <%= render 'activity', activities: @activities_lower %>
+  <% if @activities_lower.first %>
+    <%= render 'activity', activities: @activities_lower %>
+  <% else %>
+    <p>No activities</p>
+  <% end %>
 </div>
 <div class="activity-section">
   <h2>All <small>Win:<%= @activities_all_win_count %> / Lose:<%= @activities_all_lose_count %></small></h2>
-  <%= render 'activity', activities: @activities %>
+  <% if @activities.first %>
+    <%= render 'activity', activities: @activities %>
+  <% else %>
+    <p>No activities</p>
+  <% end %>
 </div>
