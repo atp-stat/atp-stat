@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'top#index'
-  get 'player/:player_url_name' => 'player#show'
-  get 'job' => 'job#index'
+  resources :player
+  resources :job
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

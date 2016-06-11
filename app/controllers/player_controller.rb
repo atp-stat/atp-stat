@@ -1,8 +1,16 @@
 class PlayerController < ApplicationController
+  def index
+    @players = Player.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @players }
+    end
+  end
+
   def show
     @year = Date.today.year.to_s
     @year = params[:year].to_s if params[:year]
-    @player = Player.convert_name_from_url_name(params[:player_url_name])
+    @player = Player.convert_name_from_url_name(params[:id])
     @activities = Activity
       .where("player_name = ?", @player)
       .where("year = ?", @year)
@@ -70,5 +78,10 @@ class PlayerController < ApplicationController
       .where("year = ?", @year)
       .where("win_loss = ?", "L")
       .count
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @activities }
+    end
   end
 end
