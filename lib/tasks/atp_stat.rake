@@ -64,5 +64,10 @@ namespace :atp_stat do
         job.update(working: 0, finished: 0)
       end
     end
+
+    desc "Calculate player status"
+    task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
+      puts "hello"
+    end
   end
 end

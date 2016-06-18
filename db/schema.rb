@@ -51,9 +51,11 @@ ActiveRecord::Schema.define(version: 20160528050245) do
   create_table "player_statuses", force: :cascade do |t|
     t.string   "year"
     t.string   "player_name"
-    t.integer  "stability"
-    t.integer  "toughness"
-    t.integer  "mentality"
+    t.float    "stability"
+    t.float    "toughness"
+    t.float    "mentality"
+    t.float    "explosive"
+    t.float    "momentum"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
