@@ -68,6 +68,11 @@ namespace :atp_stat do
     desc "Calculate player status"
     task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
       puts "hello"
+      win_count = Activity.where("win_loss = ?", "W").count
+      puts win_count
+      explosive = win_count * 10
+      puts explosive
+
     end
   end
 end
