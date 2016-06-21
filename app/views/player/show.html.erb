@@ -1,4 +1,10 @@
 <h1 class="page-header"><%= @player %>'s Activity <%= @year %></h1>
+<div>
+  <%= render 'test' %>
+</div>
+<div>
+  <canvas width="600" height="300" id="sample"></canvas>
+</div>
 <div class="select-year">
   <select id="activity-year" class="form-control">
     <% year_range = Range.new(2000, Date.today.year) %>
