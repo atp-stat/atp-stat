@@ -1,3 +1,0 @@
-# Add directory "app/assets/javascripts/html5jp"
-# Update file  "application.html.erb"
-# Update file  "show.html.erb"
