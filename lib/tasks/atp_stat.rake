@@ -99,6 +99,38 @@ namespace :atp_stat do
         puts "PlayerName = " + name.to_s
         puts "Explosive_Value = " + explosive_value.to_s
 
+        #Stability_value
+        matches_lower_lose = Activity
+          .where("player_name = ?",name)
+          .where("year = ?",args[:year])
+          .where("player_rank !=0 ")
+          .where("opponent_rank !=0 ")
+          .where("player_rank < opponent_rank")
+          .where("win_loss = ?", "L")
+        matches_lower_all_count = Activity
+          .where("player_name = ?",name)
+          .where("year = ?",args[:year])
+          .where("player_rank !=0 ")
+          .where("opponent_rank !=0 ")
+          .where("player_rank < opponent_rank")
+          .count
+      if matches_lower_all_count != 0
+        stability_points = 0
+        matches_lower_lose.each do |match_lower_lose|
+          ranking_difference = match_lower_lose.opponent_rank.to_i - match_lower_lose.player_rank.to_i
+          stability_point = ((ranking_difference.to_f / match_lower_lose.player_rank.to_f) ** 2) * (match_lower_lose.opponent_rank.to_f ** 2 )
+          stability_points += stability_point
+        end
+        if stability_points != 0
+          stability_value =  matches_lower_all_count / stability_points
+        else  # the case the player never losed to lower-ranking players
+          stability_value = 1.0
+        end
+      else
+        stability_value = 0
+      end
+      puts "Stability_Value = " + stability_value.to_s
+
       end
     end
 
