@@ -131,6 +131,51 @@ namespace :atp_stat do
       end
       puts "Stability_Value = " + stability_value.to_s
 
+      #Mentality_value
+      matches_win = Activity
+        .where("player_name = ?",name)
+        .where("year = ?",args[:year])
+        .where("win_loss = ?", "W")
+      matches_win_count = Activity
+        .where("player_name = ?",name)
+        .where("year = ?",args[:year])
+        .where("win_loss = ?", "W")
+        .count
+      if matches_win_count != 0
+        mentality_points = 0
+        matches_win.each do |match_win|
+          point_category = match_win.tournament_category
+          if point_category == "grandslam" then
+            mentality_point = 10
+          elsif point_category == "finals-pos" then
+            mentality_point = 10
+          elsif point_category == "1000s" then
+            mentality_point = 5
+          elsif point_category == "500" then
+            mentality_point = 2
+          elsif point_category == "250" then
+            mentality_point = 1
+          elsif point_category == "atpwt" then
+            mentality_point = 2
+          elsif point_category == "challenger" then
+            mentality_point = 0
+          elsif point_category == "itf" then
+            mentality_point = 0
+          else
+            mentality_point = 0
+          end
+          mentality_points += mentality_point
+        end
+        mentality_value = mentality_points.to_f / matches_win_count.to_f
+      else
+        mentality_value = 0
+      end
+      puts "Mentality_Value = " + mentality_value.to_s
+
+      #Momentum_value
+
+      #Toughness_value
+
       end
     end
 
