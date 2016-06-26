@@ -69,33 +69,36 @@ namespace :atp_stat do
     task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
       players = Activity.select("player_name").uniq!
       players.each do |player|
+        # Explosive_value
         name = player.player_name
-        matches_higher = Activity
+        matches_higher_win = Activity
           .where("player_name = ?",name)
           .where("year = ?",args[:year])
           .where("player_rank !=0 ")
           .where("opponent_rank !=0 ")
           .where("player_rank > opponent_rank")
-        matches_higher_count = Activity
+          .where("win_loss = ?", "W")
+        matches_higher_all_count = Activity
           .where("player_name = ?",name)
           .where("year = ?",args[:year])
           .where("player_rank !=0 ")
           .where("opponent_rank !=0 ")
           .where("player_rank > opponent_rank")
           .count
-        if matches_higher_count != 0
+        if matches_higher_all_count != 0
           explosive_points = 0
-          matches_higher.each do |match_higher|
-            ranking_difference = match_higher.player_rank.to_i - match_higher.opponent_rank.to_i
-            explosive_point = 1 / match_higher.opponent_rank.to_f * (ranking_difference.to_f / match_higher.player_rank.to_f) ** 2
+          matches_higher_win.each do |match_higher_win|
+            ranking_difference = match_higher_win.player_rank.to_i - match_higher_win.opponent_rank.to_i
+            explosive_point = 1 / match_higher_win.opponent_rank.to_f * (ranking_difference.to_f / match_higher_win.player_rank.to_f) ** 2
             explosive_points += explosive_point
           end
-          explosive_value = explosive_points / matches_higher_count
+          explosive_value = explosive_points / matches_higher_all_count
         else
           explosive_value = 0
         end
         puts "PlayerName = " + name.to_s
         puts "Explosive_Value = " + explosive_value.to_s
+
       end
     end
 
