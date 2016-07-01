@@ -83,5 +83,6 @@ class PlayerController < ApplicationController
       format.html
       format.json { render json: @activities }
     end
+
   end
 end
