@@ -106,4 +106,41 @@ class Activity < ActiveRecord::Base
       end
       puts "Mentality_Value = " + mentality_value.to_s
   end
+
+  #Momentum_value
+  def self.calculate_status_momentum(player_name,year)
+      matches_current_year = Activity
+        .where("player_name = ?",player_name)
+        .where("year = ?",year)
+      matches_current_year_count = Activity
+        .where("player_name = ?",player_name)
+        .where("year = ?",year)
+        .count
+      ranking_current_year_total = 0
+      matches_current_year.each do |match_current_year|
+        ranking_current_year = match_current_year.player_rank
+        ranking_current_year_total += ranking_current_year
+      end
+      ranking_current_year_average = ranking_current_year_total.to_f/matches_current_year_count.to_f
+      puts ranking_current_year_average
+
+      year = year.to_i - 1
+      year = year.to_s
+
+      matches_last_year = Activity
+        .where("player_name = ?",player_name)
+        .where("year = ?",year)
+      matches_last_year_count = Activity
+        .where("player_name = ?",player_name)
+        .where("year = ?",year)
+        .count
+      ranking_last_year_total = 0
+      matches_last_year.each do |match_last_year|
+        ranking_last_year = match_last_year.player_rank
+        ranking_last_year_total += ranking_last_year
+      end
+      ranking_last_year_average = ranking_last_year_total.to_f/matches_last_year_count.to_f
+      puts ranking_last_year_average
+
+  end
 end

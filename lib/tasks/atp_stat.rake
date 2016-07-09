@@ -67,9 +67,10 @@ namespace :atp_stat do
 
     desc "Calculate player status"
     task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
-      Activity.calculate_status_explosive(args[:player_name],args[:year])
-      Activity.calculate_status_stability(args[:player_name],args[:year])
-      Activity.calculate_status_mentality(args[:player_name],args[:year])
+      # Activity.calculate_status_explosive(args[:player_name],args[:year])
+      # Activity.calculate_status_stability(args[:player_name],args[:year])
+      # Activity.calculate_status_mentality(args[:player_name],args[:year])
+      Activity.calculate_status_momentum(args[:player_name],args[:year])
     end
 
     desc "Calculate players status for all players"

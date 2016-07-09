@@ -6,6 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <!--[if IE]><script type="text/javascript" src="../html5jp/excanvas/excanvas.js"></script><![endif]-->
+  <script type="text/javascript" src="app/assets/javascripts/html5jp/graph/radar.js"></script>
+  <script type="text/javascript">
+  window.onload = function() {
+    var rc = new html5jp.graph.radar("sample");
+    if( ! rc ) { return; }
+    var items = [
+      ["Player", 120, 60, 70, 30, 30],
+      ["Avarage", 30, 30, 30, 30, 30]
+    ];
+    var params = {
+      aCap: ["stability", "toughness", "mentality", "explosive", "momentum"],
+      aMax:100
+    }
+    rc.draw(items, params);
+  };
+  </script>
+
 </head>
 <body>
 <header>
