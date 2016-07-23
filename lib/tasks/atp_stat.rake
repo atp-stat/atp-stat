@@ -149,17 +149,5 @@ namespace :atp_stat do
         end
       end
     end
-
-    desc "Calculate players status for all players"
-    task :calculate_status_all, ['year'] => :environment do |task, args|
-      players = Player.select("name")
-      players.each do |player|
-        player_name = player.name
-        Activity.calculate_status_explosive(player_name,args[:year])
-        Activity.calculate_status_stability(player_name,args[:year])
-        Activity.calculate_status_mentality(player_name,args[:year])
-      end
-    end
-
   end
 end
