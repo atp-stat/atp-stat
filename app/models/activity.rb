@@ -26,8 +26,6 @@ class Activity < ActiveRecord::Base
       else
         explosive_value = 0
       end
-        puts "PlayerName = " + player_name.to_s
-        puts "Explosive_Value = " + explosive_value.to_s
   end
 
   #Stability_value
@@ -61,7 +59,6 @@ class Activity < ActiveRecord::Base
       else
         stability_value = 0
       end
-      puts "Stability_Value = " + stability_value.to_s
   end
 
   #Mentality_value
@@ -79,21 +76,22 @@ class Activity < ActiveRecord::Base
         mentality_points = 0
         matches_win.each do |match_win|
           point_category = match_win.tournament_category
-          if point_category == "grandslam" then
+          case point_category
+          when "grandslam" then
             mentality_point = 10
-          elsif point_category == "finals-pos" then
+          when "finals-pos" then
             mentality_point = 10
-          elsif point_category == "1000s" then
+          when "1000s" then
             mentality_point = 5
-          elsif point_category == "500" then
+          when "500" then
             mentality_point = 2
-          elsif point_category == "250" then
+          when "250" then
             mentality_point = 1
-          elsif point_category == "atpwt" then
+          when "atpwt" then
             mentality_point = 2
-          elsif point_category == "challenger" then
+          when "challenger" then
             mentality_point = 0
-          elsif point_category == "itf" then
+          when "itf" then
             mentality_point = 0
           else
             mentality_point = 0
@@ -104,16 +102,17 @@ class Activity < ActiveRecord::Base
       else
         mentality_value = 0
       end
-      puts "Mentality_Value = " + mentality_value.to_s
   end
 
   #Momentum_value
   def self.calculate_status_momentum(player_name,year)
       matches_current_year = Activity
         .where("player_name = ?",player_name)
+        .where("player_rank != 0")
         .where("year = ?",year)
       matches_current_year_count = Activity
         .where("player_name = ?",player_name)
+        .where("player_rank != 0")
         .where("year = ?",year)
         .count
       ranking_current_year_total = 0
@@ -122,16 +121,17 @@ class Activity < ActiveRecord::Base
         ranking_current_year_total += ranking_current_year
       end
       ranking_current_year_average = ranking_current_year_total.to_f/matches_current_year_count.to_f
-      puts ranking_current_year_average
 
       year = year.to_i - 1
       year = year.to_s
 
       matches_last_year = Activity
         .where("player_name = ?",player_name)
+        .where("player_rank != 0")
         .where("year = ?",year)
       matches_last_year_count = Activity
         .where("player_name = ?",player_name)
+        .where("player_rank != 0")
         .where("year = ?",year)
         .count
       ranking_last_year_total = 0
@@ -140,7 +140,30 @@ class Activity < ActiveRecord::Base
         ranking_last_year_total += ranking_last_year
       end
       ranking_last_year_average = ranking_last_year_total.to_f/matches_last_year_count.to_f
-      puts ranking_last_year_average
 
+      year = year.to_i - 1
+      year = year.to_s
+
+      matches_2yearsago_year = Activity
+        .where("player_name = ?",player_name)
+        .where("player_rank != 0")
+        .where("year = ?",year)
+      matches_2yearsago_year_count = Activity
+        .where("player_name = ?",player_name)
+        .where("player_rank != 0")
+        .where("year = ?",year)
+        .count
+      ranking_2yearsago_year_total = 0
+      matches_2yearsago_year.each do |match_2yearsago_year|
+        ranking_2yearsago_year = match_2yearsago_year.player_rank
+        ranking_2yearsago_year_total += ranking_2yearsago_year
+      end
+      ranking_2yearsago_year_average = ranking_2yearsago_year_total.to_f/matches_2yearsago_year_count.to_f
+      momentum_value = - ((ranking_current_year_average - ranking_last_year_average) - (ranking_last_year_average - ranking_2yearsago_year_average))
+  end
+
+  #toughness_value
+  def self.calculate_status_toughness(player_name,year)
+    return 0
   end
 end

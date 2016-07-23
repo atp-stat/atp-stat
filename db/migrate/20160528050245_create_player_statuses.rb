@@ -10,5 +10,6 @@ class CreatePlayerStatuses < ActiveRecord::Migration
       t.float :momentum
       t.timestamps null: false
     end
+    add_index :player_statuses, [:year, :player_name], unique: true, name: 'player_statuses_uniq_index'
   end
 end

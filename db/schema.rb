@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20160528050245) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "player_statuses", ["year", "player_name"], name: "player_statuses_uniq_index", unique: true, using: :btree
+
   create_table "players", force: :cascade do |t|
     t.string   "name"
     t.string   "url_name"
