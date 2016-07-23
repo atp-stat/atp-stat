@@ -64,5 +64,90 @@ namespace :atp_stat do
         job.update(working: 0, finished: 0)
       end
     end
+
+    desc "Calculate player status"
+    task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
+      player = {
+        :year => args[:year],
+        :player_name => args[:player_name],
+        :explosive_value => Activity.calculate_status_explosive(args[:player_name],args[:year]),
+        :stability_value => Activity.calculate_status_stability(args[:player_name],args[:year]),
+        :mentality_value => Activity.calculate_status_mentality(args[:player_name],args[:year]),
+        :momentum_value => Activity.calculate_status_momentum(args[:player_name],args[:year]),
+        :toughness_value => Activity.calculate_status_toughness(args[:player_name],args[:year])
+      }
+
+      player_status = PlayerStatus.where(:year => player[:year], :player_name => player[:player_name])
+      if player_status.exists?
+          player_status.update_all(
+            stability: player[:stability_value],
+            toughness: player[:toughness_value],
+            mentality: player[:mentality_value],
+            explosive: player[:explosive_value],
+            momentum: player[:momentum_value]
+          )
+          puts "[Updated] Record create(#{player[:player_name]},#{player[:year]})"
+      else
+        begin
+          PlayerStatus.create(
+            year: player[:year],
+            player_name: player[:player_name],
+            stability: player[:stability_value],
+            toughness: player[:toughness_value],
+            mentality: player[:mentality_value],
+            explosive: player[:explosive_value],
+            momentum: player[:momentum_value]
+          )
+          puts "[Calculated] Record create(#{player[:player_name]},#{player[:year]})"
+        rescue => e
+          puts "[Skip] Record create Error(#{player[:player_name]},#{player[:year]})"
+          next
+        end
+      end
+    end
+
+    desc "Calculate player status for all players"
+    task :calculate_status_all_players, ['year'] => :environment do |task, args|
+      players = Player.select("name")
+      players.each do |player|
+        player_name = player.name
+        player_data = {
+          :year => args[:year],
+          :player_name => player_name,
+          :explosive_value => Activity.calculate_status_explosive(player_name,args[:year]),
+          :stability_value => Activity.calculate_status_stability(player_name,args[:year]),
+          :mentality_value => Activity.calculate_status_mentality(player_name,args[:year]),
+          :momentum_value => Activity.calculate_status_momentum(player_name,args[:year]),
+          :toughness_value => Activity.calculate_status_toughness(player_name,args[:year])
+        }
+        player_status = PlayerStatus.where(:year => player_data[:year], :player_name => player_data[:player_name])
+        if player_status.exists?
+            player_status.update_all(
+              stability: player_data[:stability_value],
+              toughness: player_data[:toughness_value],
+              mentality: player_data[:mentality_value],
+              explosive: player_data[:explosive_value],
+              momentum: player_data[:momentum_value]
+            )
+            puts "[Updated] Record create(#{player_data[:player_name]},#{player_data[:year]})"
+        else
+          begin
+            PlayerStatus.create(
+              year: player_data[:year],
+              player_name: player_data[:player_name],
+              stability: player_data[:stability_value],
+              toughness: player_data[:toughness_value],
+              mentality: player_data[:mentality_value],
+              explosive: player_data[:explosive_value],
+              momentum: player_data[:momentum_value]
+            )
+            puts "[Calculated] Record create(#{player_data[:player_name]},#{player_data[:year]})"
+          rescue => e
+            puts "[Skip] Record create Error(#{player_data[:player_name]},#{player_data[:year]})"
+            next
+          end
+        end
+      end
+    end
   end
 end
