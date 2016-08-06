@@ -88,7 +88,11 @@ namespace :atp_stat do
         :momentum  => Activity.calculate_status_momentum(name, year),
         :toughness => Activity.calculate_status_toughness(name, year),
         :vs_top10_win  => Activity.count_vs_top10(name, year, 'W'),
-        :vs_top10_loss => Activity.count_vs_top10(name, year, 'L')
+        :vs_top10_loss => Activity.count_vs_top10(name, year, 'L'),
+        :vs_higher_win  => Activity.count_vs_higher(name, year, 'W'),
+        :vs_higher_loss => Activity.count_vs_higher(name, year, 'L'),
+        :vs_lower_win  => Activity.count_vs_lower(name, year, 'W'),
+        :vs_lower_loss => Activity.count_vs_lower(name, year, 'L')
       }
 
       player_status = PlayerStatus.where(:year => player[:year], :player_name => player[:player_name])

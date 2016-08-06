@@ -7,6 +7,22 @@ class Activity < ActiveRecord::Base
       .count
   end
 
+  def self.count_vs_higher(player_name, year, win_loss)
+    Activity.where("player_name = ?", player_name)
+      .where("year = ?", year)
+      .where("player_rank < opponent_rank")
+      .where("win_loss = ?", win_loss)
+      .count
+  end
+
+  def self.count_vs_lower(player_name, year, win_loss)
+    Activity.where("player_name = ?", player_name)
+      .where("year = ?", year)
+      .where("player_rank > opponent_rank")
+      .where("win_loss = ?", win_loss)
+      .count
+  end
+
   # Explosive_value
   def self.calculate_status_explosive(player_name,year)
       matches_higher_win = Activity
