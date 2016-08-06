@@ -28,6 +28,48 @@
     <% end %>
     </table>
   </div>
+  <div class="col-md-4">
+    <h2>vs higher</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>W/L</th>
+        </tr>
+      </thead>
+    <% @ranking_vs_higher.each.with_index(1) do |r, n| %>
+      <tbody>
+        <tr>
+          <td><%= n %></td>
+          <td><%= r.player_name %></td>
+          <td><%= r.vs_higher_win %> / <%= r.vs_higher_loss %></td>
+        </tr>
+      </tbody>
+    <% end %>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h2>vs lower</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>W/L</th>
+        </tr>
+      </thead>
+    <% @ranking_vs_lower.each.with_index(1) do |r, n| %>
+      <tbody>
+        <tr>
+          <td><%= n %></td>
+          <td><%= r.player_name %></td>
+          <td><%= r.vs_lower_win %> / <%= r.vs_lower_loss %></td>
+        </tr>
+      </tbody>
+    <% end %>
+    </table>
+  </div>
 </div>
 
 <h1>Players</h1>

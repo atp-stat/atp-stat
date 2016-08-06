@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806071201) do
+ActiveRecord::Schema.define(version: 20160806114531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,10 +56,14 @@ ActiveRecord::Schema.define(version: 20160806071201) do
     t.float    "mentality"
     t.float    "explosive"
     t.float    "momentum"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "vs_top10_win"
     t.integer  "vs_top10_loss"
+    t.integer  "vs_higher_win"
+    t.integer  "vs_higher_loss"
+    t.integer  "vs_lower_win"
+    t.integer  "vs_lower_loss"
   end
 
   add_index "player_statuses", ["year", "player_name"], name: "player_statuses_uniq_index", unique: true, using: :btree
