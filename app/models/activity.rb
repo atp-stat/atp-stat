@@ -10,7 +10,7 @@ class Activity < ActiveRecord::Base
   def self.count_vs_higher(player_name, year, win_loss)
     Activity.where("player_name = ?", player_name)
       .where("year = ?", year)
-      .where("player_rank < opponent_rank")
+      .where("player_rank > opponent_rank")
       .where("win_loss = ?", win_loss)
       .count
   end
@@ -18,7 +18,7 @@ class Activity < ActiveRecord::Base
   def self.count_vs_lower(player_name, year, win_loss)
     Activity.where("player_name = ?", player_name)
       .where("year = ?", year)
-      .where("player_rank > opponent_rank")
+      .where("player_rank < opponent_rank")
       .where("win_loss = ?", win_loss)
       .count
   end
