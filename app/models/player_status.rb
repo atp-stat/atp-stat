@@ -16,6 +16,7 @@ class PlayerStatus < ActiveRecord::Base
   def self.ranking_vs_lower(year = Date.today.year.to_s, limit = 10)
     PlayerStatus
       .where("year = ?", year)
+      .where("vs_lower_win != ?", 0)
       .order("vs_lower_loss ASC, vs_lower_win DESC")
       .limit(limit)
   end
