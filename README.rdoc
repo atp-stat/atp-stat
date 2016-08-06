@@ -1,28 +1,11 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+■タスク
+<tt>rake atp_stat:ranking:get[range]</tt>
+ # Get player ranking and import them to db
+<tt>rake atp_stat:activity:get[player_id,year]</tt>
+ # Get player activity and import them to db
+ranking:get => 最新のランキングから、指定したrangeの選手名の一覧を取得
+(ex. ランキング1-20位の選手をDBに格納 => <tt>rake atp_stat:ranking:get[1-20]</tt>
+activity:get => 指定したplayer_idの、指定したyearの全ての戦績&ランキングを取得
+(ex. 2016年のフェデラーの戦績をDBに格納=><tt> rake atp_stat:activity:get[f324,2016]</tt>)
