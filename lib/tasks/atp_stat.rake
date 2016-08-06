@@ -81,11 +81,13 @@ namespace :atp_stat do
       player = {
         :year => year,
         :player_name => name,
-        :explosive => Activity.calculate_status_explosive(name,year),
-        :stability => Activity.calculate_status_stability(name,year),
-        :mentality => Activity.calculate_status_mentality(name,year),
-        :momentum  => Activity.calculate_status_momentum(name,year),
-        :toughness => Activity.calculate_status_toughness(name,year)
+        :explosive => Activity.calculate_status_explosive(name, year),
+        :stability => Activity.calculate_status_stability(name, year),
+        :mentality => Activity.calculate_status_mentality(name, year),
+        :momentum  => Activity.calculate_status_momentum(name, year),
+        :toughness => Activity.calculate_status_toughness(name, year),
+        :vs_top10_win  => Activity.count_vs_top10(name, year, 'W'),
+        :vs_top10_loss => Activity.count_vs_top10(name, year, 'L')
       }
 
       player_status = PlayerStatus.where(:year => player[:year], :player_name => player[:player_name])
