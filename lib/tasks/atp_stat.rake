@@ -73,7 +73,6 @@ namespace :atp_stat do
     desc "Calculate player status for all players"
     task :calculate_status_all_players, ['year'] => :environment do |task, args|
       Player.select("name").each do |player|
-        puts player.name
         calculate(player.name, args[:year])
       end
     end
