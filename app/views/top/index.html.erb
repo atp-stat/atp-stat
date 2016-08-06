@@ -4,6 +4,32 @@
   Let's select a palyer and see analyzed data.<br />
   This service is using <a href=https://github.com/mosuke5/atp_scraper target="_blank">AtpScraper</a>.
 </p>
+
+<h1>Analysis</h1>
+<div class="row">
+  <div class="col-md-4">
+    <h2>vs top10</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>W/L</th>
+        </tr>
+      </thead>
+    <% @ranking_vs_top10.each.with_index(1) do |r, n| %>
+      <tbody>
+        <tr>
+          <td><%= n %></td>
+          <td><%= r.player_name %></td>
+          <td><%= r.vs_top10_win %> / <%= r.vs_top10_loss %></td>
+        </tr>
+      </tbody>
+    <% end %>
+    </table>
+  </div>
+</div>
+
 <h1>Players</h1>
 <div id="player-list">
   <form class="form-inline form-player-search">
