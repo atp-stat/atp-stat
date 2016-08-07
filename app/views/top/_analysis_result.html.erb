@@ -1,0 +1,25 @@
+<div class="col-md-4">
+  <h2><%= title %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>W/L</th>
+      </tr>
+    </thead>
+  <% result.each.with_index(1) do |r, n| %>
+    <% 
+      win  = eval("r.vs_#{name}_win")
+      loss = eval("r.vs_#{name}_loss")
+    %>
+    <tbody>
+      <tr>
+        <td><%= n %></td>
+        <td><%= r.player_name %></td>
+        <td><%= win %> / <%= loss %></td>
+      </tr>
+    </tbody>
+  <% end %>
+  </table>
+</div>
