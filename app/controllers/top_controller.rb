@@ -5,4 +5,7 @@ class TopController < ApplicationController
     @ranking_vs_higher = PlayerStatus.ranking_vs_higher
     @ranking_vs_lower  = PlayerStatus.ranking_vs_lower
   end
+
+  def about
+  end
 end
