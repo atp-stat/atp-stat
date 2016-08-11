@@ -16,8 +16,8 @@
     <tbody>
       <tr>
         <td><%= n %></td>
-        <td><%= r.player_name %></td>
-        <td><%= win %> / <%= loss %></td>
+        <td><%= r.player.name %></td>
+        <td><%= link_to "#{win} / #{loss}", player_path(r.player.url_name) %></td>
       </tr>
     </tbody>
   <% end %>
