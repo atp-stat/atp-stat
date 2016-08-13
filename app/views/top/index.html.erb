@@ -19,6 +19,7 @@
   <%= render 'analysis_result', { result: @ranking_vs_lower, title: 'vs Lower', name: 'lower' } %>
 </div>
 <h1 class="page-header">Current Ranking</h1>
+<%= link_to "Show all players and search.", player_index_path %>
 <div class="row">
   <% Range.new(0, 2).each do |n| %>
   <% start_ranking = n*10 %>
