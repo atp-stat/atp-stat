@@ -1,5 +1,10 @@
 <h1>Players</h1>
 <div id="player-list">
+  <form class="form-inline form-player-search">
+    <div class="form-group">
+      <input class=" col-xs-3 search form-control" placeholder="Player Search">
+    </div>
+  </form>
   <ul class="list">
     <% @players.each do |player| %>
     <li>
