@@ -22,6 +22,20 @@ namespace :atp_stat do
         end
       end
     end
+    
+    desc "Update current top ranking."
+    task :update => :environment do |task, args|
+      Ranking.delete_all
+      AtpScraper::Get.singles_ranking.each do |player|
+        Ranking.create(
+          ranking: player[:ranking],
+          name: player[:player_name],
+          points: player[:points],
+          date: Date.today
+        )
+        puts "[Create] Record create(#{player[:player_name]})"
+      end
+    end
   end
   namespace :activity do
     desc "Get player activity and import them to db."

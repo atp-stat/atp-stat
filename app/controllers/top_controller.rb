@@ -6,6 +6,7 @@ class TopController < ApplicationController
     @ranking_vs_top10  = PlayerStatus.ranking_vs_top10
     @ranking_vs_higher = PlayerStatus.ranking_vs_higher
     @ranking_vs_lower  = PlayerStatus.ranking_vs_lower
+    @ranking = Ranking.joins(:player).order("ranking asc").limit(30)
   end
 
   def about

@@ -18,5 +18,29 @@
   <%= render 'analysis_result', { result: @ranking_vs_higher, title: 'vs Higher', name: 'higher' } %>
   <%= render 'analysis_result', { result: @ranking_vs_lower, title: 'vs Lower', name: 'lower' } %>
 </div>
-
-<%= render :template => "player/index" %>
+<h1 class="page-header">Current Ranking</h1>
+<div class="row">
+  <% Range.new(0, 2).each do |n| %>
+  <% start_ranking = n*10 %>
+  <div class="col-md-4 current-ranking">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ranking[start_ranking,10].each do |r| %>
+        <tr>
+          <td><%= r.ranking %></td>
+          <td><%= link_to r.name, player_path(r.player.url_name) %></td>
+          <td><%= r.points %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+</div>

@@ -16,5 +16,13 @@
  */
 
 body {
-    padding-top: 50px;
+  padding-top: 50px;
+}
+
+footer {
+  height: 50px;
+
+  .container p {
+    margin: 20px 0;
+  }
 }
