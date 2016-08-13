@@ -7,24 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-  <!--[if IE]><script type="text/javascript" src="../html5jp/excanvas/excanvas.js"></script><![endif]-->
-  <script type="text/javascript" src="app/assets/javascripts/html5jp/graph/radar.js"></script>
-  <script type="text/javascript">
-  window.onload = function() {
-    var rc = new html5jp.graph.radar("sample");
-    if( ! rc ) { return; }
-    var items = [
-      ["Player", 120, 60, 70, 30, 30],
-      ["Avarage", 30, 30, 30, 30, 30]
-    ];
-    var params = {
-      aCap: ["stability", "toughness", "mentality", "explosive", "momentum"],
-      aMax:100
-    }
-    rc.draw(items, params);
-  };
-  </script>
-
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <header>

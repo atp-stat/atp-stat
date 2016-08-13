@@ -1,4 +1,4 @@
-<h1 class="page-header"><%= @player %>'s Activity <%= @year %></h1>
+<h1 class="page-header"><%= @player.name %>'s Activity <%= @year %></h1>
 <div class="select-year">
   <select id="activity-year" class="form-control">
     <% year_range = Range.new(2000, Date.today.year) %>
@@ -6,6 +6,9 @@
     <option value="<%= y %>" <%= "selected" if y == @year.to_i %>><%= y %></option>
     <% end %>
   </select>
+</div>
+<div class="player-links">
+  <%= link_to "#{@player.name}'s ATP official page", "http://www.atpworldtour.com/en/players/xx/#{@player.url_id}/overview", { class: "btn btn-link btn-sm", target: "_balnk" }%>
 </div>
 <div class="activity-section">
   <h2>vs Top10 <small>Win:<%= @activities_vstop10_win_count %> / Lose:<%= @activities_vstop10_lose_count %></small></h2>
