@@ -22,4 +22,36 @@ class PlayerStatus < ActiveRecord::Base
       .where("vs_lower_win != ?", 0)
       .order("vs_lower_loss ASC, vs_lower_win DESC")
   end
+
+  def self.calculate(name, year)
+    {
+      :year => year,
+      :player_name => name,
+      :explosive => Activity.calculate_status_explosive(name, year),
+      :stability => Activity.calculate_status_stability(name, year),
+      :mentality => Activity.calculate_status_mentality(name, year),
+      :momentum  => Activity.calculate_status_momentum(name, year),
+      :toughness => Activity.calculate_status_toughness(name, year),
+      :vs_top10_win  => Activity.count_vs_top10(name, year, 'W'),
+      :vs_top10_loss => Activity.count_vs_top10(name, year, 'L'),
+      :vs_higher_win  => Activity.count_vs_higher(name, year, 'W'),
+      :vs_higher_loss => Activity.count_vs_higher(name, year, 'L'),
+      :vs_lower_win  => Activity.count_vs_lower(name, year, 'W'),
+      :vs_lower_loss => Activity.count_vs_lower(name, year, 'L')
+    }
+  end
+
+  def self.create_or_update(data)
+    record = PlayerStatus.where(
+      :year => data[:year],
+      :player_name => data[:player_name]
+    )
+    if record.exists?
+      record.update_all(data)
+      puts "Record update(#{data[:player_name]},#{data[:year]})"
+    else
+      PlayerStatus.create(data)
+      puts "Record create(#{data[:player_name]},#{data[:year]})"
+    end
+  end
 end

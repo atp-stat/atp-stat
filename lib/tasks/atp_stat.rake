@@ -67,45 +67,16 @@ namespace :atp_stat do
 
     desc "Calculate player status"
     task :calculate_status, ['player_name', 'year'] => :environment do |task, args|
-      calculate(args[:player_name], args[:year])
+      data = PlayerStatus.calculate(args[:player_name], args[:year])
+      PlayerStatus.create_or_update(data)
     end
 
     desc "Calculate player status for all players"
     task :calculate_status_all_players, ['year'] => :environment do |task, args|
       year = args[:year] || Date.today.year.to_s
       Player.select("name").each do |player|
-        calculate(player.name, year)
-      end
-    end
-
-    def calculate(name, year)
-      player = {
-        :year => year,
-        :player_name => name,
-        :explosive => Activity.calculate_status_explosive(name, year),
-        :stability => Activity.calculate_status_stability(name, year),
-        :mentality => Activity.calculate_status_mentality(name, year),
-        :momentum  => Activity.calculate_status_momentum(name, year),
-        :toughness => Activity.calculate_status_toughness(name, year),
-        :vs_top10_win  => Activity.count_vs_top10(name, year, 'W'),
-        :vs_top10_loss => Activity.count_vs_top10(name, year, 'L'),
-        :vs_higher_win  => Activity.count_vs_higher(name, year, 'W'),
-        :vs_higher_loss => Activity.count_vs_higher(name, year, 'L'),
-        :vs_lower_win  => Activity.count_vs_lower(name, year, 'W'),
-        :vs_lower_loss => Activity.count_vs_lower(name, year, 'L')
-      }
-
-      player_status = PlayerStatus.where(:year => player[:year], :player_name => player[:player_name])
-      if player_status.exists?
-          player_status.update_all(player)
-          puts "Record update(#{player[:player_name]},#{player[:year]})"
-      else
-        begin
-          PlayerStatus.create(player)
-          puts "Record create(#{player[:player_name]},#{player[:year]})"
-        rescue => e
-          puts "Record create Error(#{player[:player_name]},#{player[:year]})"
-        end
+        data = PlayerStatus.calculate(player.name, year)
+        PlayerStatus.create_or_update(data)
       end
     end
   end
