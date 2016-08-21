@@ -11,71 +11,41 @@ class PlayerController < ApplicationController
     @year = Date.today.year.to_s
     @year = params[:year].to_s if params[:year]
     @player = Player.find_by(name: Player.convert_name_from_url_name(params[:id]))
-    @activities = Activity
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
-    @activities_all_win_count = Activity
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
+    @activities = Activity.default_all(@player.name, @year)
+    @activities_all_win_count = Activity.default_all(@player.name, @year)
       .where("win_loss = ?", "W")
       .count
-    @activities_all_lose_count = Activity
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
+    @activities_all_lose_count = Activity.default_all(@player.name, @year)
       .where("win_loss = ?", "L")
       .count
-    @activities_vstop10 = Activity
+    @activities_vstop10 = Activity.default_all(@player.name, @year)
       .where("opponent_rank <= ?", 10)
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
-      .order("tournament_start_date")
-      .order("id DESC")
-    @activities_vstop10_win_count = Activity
+    @activities_vstop10_win_count = Activity.default_all(@player.name, @year)
       .where("opponent_rank <= ?", 10)
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "W")
       .count
-    @activities_vstop10_lose_count = Activity
+    @activities_vstop10_lose_count = Activity.default_all(@player.name, @year)
       .where("opponent_rank <= ?", 10)
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "L")
       .count
-    @activities_higher = Activity
+    @activities_higher = Activity.default_all(@player.name, @year)
       .where("player_rank > opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
-      .order("tournament_start_date")
-      .order("id DESC")
-    @activities_higher_win_count = Activity
+    @activities_higher_win_count = Activity.default_all(@player.name, @year)
       .where("player_rank > opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "W")
       .count
-    @activities_higher_lose_count = Activity
+    @activities_higher_lose_count = Activity.default_all(@player.name, @year)
       .where("player_rank > opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "L")
       .count
-    @activities_lower = Activity
+    @activities_lower = Activity.default_all(@player.name, @year)
       .where("player_rank < opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
-      .order("tournament_start_date")
-      .order("id DESC")
-    @activities_lower_win_count = Activity
+    @activities_lower_win_count = Activity.default_all(@player.name, @year)
       .where("player_rank < opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "W")
       .count
-    @activities_lower_lose_count = Activity
+    @activities_lower_lose_count = Activity.default_all(@player.name, @year)
       .where("player_rank < opponent_rank")
-      .where("player_name = ?", @player.name)
-      .where("year = ?", @year)
       .where("win_loss = ?", "L")
       .count
 

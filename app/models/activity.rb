@@ -1,6 +1,13 @@
 class Activity < ActiveRecord::Base
   belongs_to :player, foreign_key: :player_name, primary_key: :player_name
 
+  scope :default_all, ->(name, year) {
+    where("player_name = ?", name)
+    .where("year = ?", year)
+    .order("tournament_start_date")
+    .order("id desc")
+  }
+
   def self.count_vs_top10(player_name, year, win_loss)
     Activity.where("player_name = ?", player_name)
       .where("year = ?", year)
