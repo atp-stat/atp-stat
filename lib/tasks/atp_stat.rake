@@ -22,7 +22,7 @@ namespace :atp_stat do
         end
       end
     end
-    
+
     desc "Update current top ranking."
     task :update => :environment do |task, args|
       Ranking.delete_all

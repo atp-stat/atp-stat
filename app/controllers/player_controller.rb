@@ -48,7 +48,10 @@ class PlayerController < ApplicationController
       .where("player_rank < opponent_rank")
       .where("win_loss = ?", "L")
       .count
-
+    @player_status = PlayerStatus
+    .where("player_name = ?", @player.name)
+    .where("year = ?", @year)
+    
     respond_to do |format|
       format.html
       format.json { render json: @activities }

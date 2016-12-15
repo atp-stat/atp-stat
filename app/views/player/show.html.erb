@@ -10,6 +10,48 @@
 <div class="player-links">
   <%= link_to "#{@player.name}'s ATP official page", "http://www.atpworldtour.com/en/players/xx/#{@player.url_id}/overview", { class: "btn btn-link btn-sm", target: "_balnk" }%>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+<script>
+var player_status = <%= raw @player_status.to_json %>;
+var config = {
+   type: 'radar',
+   data: {
+       labels: ["Stability", "Toughness", "Mentality", "Explosive", "Momentum"],
+       datasets: [{
+         label: "PlayerStatus",
+         backgroundColor: "rgba(70,50,198,0.7)",
+         borderColor: "rgba(70,50,198,1)",
+         pointBackgroundColor: "rgba(179,181,198,1)",
+         pointBorderColor: "#fff",
+         pointHoverBackgroundColor: "#fff",
+         pointHoverBorderColor: "rgba(179,181,198,1)",
+         data: [player_status[0].stability,player_status[0].toughness,player_status[0].mentality,player_status[0].explosive,player_status[0].momentum]
+       }]
+   },
+   options: {
+     scale: {
+       ticks: {
+         beginAtZero: true,
+         min: 0,
+         max: 100,
+         stepSize: 20
+       }
+     }
+   }
+ };
+window.onload = function() {
+ var ctx = document.getElementById("canvas").getContext("2d");
+ window.myLine = new Chart(ctx, config);
+};
+console.log(player_status);
+console.log(config);
+</script>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+
 <div class="activity-section">
   <h2>vs Top10 <small>Win:<%= @activities_vstop10_win_count %> / Lose:<%= @activities_vstop10_lose_count %></small></h2>
   <% if @activities_vstop10.first %>
